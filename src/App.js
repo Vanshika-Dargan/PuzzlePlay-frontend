@@ -32,7 +32,7 @@ const App = () => {
 });
   const user=JSON.parse(localStorage.getItem('profile'));
   return (
-   <GoogleOAuthProvider clientId={process.env.CLIENT_ID}>
+   <GoogleOAuthProvider clientId="1054788579196-s0dj3mtah60b5vl7c7he9otklr7tpfpn.apps.googleusercontent.com">
     <BrowserRouter>
     <ThemeProvider theme={theme}>
     <Container maxWidth="xl" sx={{backgroundColor:'#2A2F4F'}}>
