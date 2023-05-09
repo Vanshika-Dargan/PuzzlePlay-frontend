@@ -49,11 +49,11 @@ const App = () => {
         <Route path="/clue5" element={<Clue5 setFinished={setFinished}/>}/>
         <Route path="/auth" element={!user ? <Auth /> : <Navigate to="/home" /> }/>
       </Routes>
-      </GoogleOAuthProvider>
+     
     </Container>
     </ThemeProvider>
     </BrowserRouter>
-
+     </GoogleOAuthProvider>
   );
 };
 export default App;
