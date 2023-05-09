@@ -47,7 +47,7 @@ const App = () => {
         <Route path="/clue3" element={<Clue3 />}/>
         <Route path="/clue4" element={<Clue4 />}/>
         <Route path="/clue5" element={<Clue5 setFinished={setFinished}/>}/>
-        <Route path="/auth" element={!user?<Auth/>:<Navigate to="/home"/>}/>
+        <Route path="/auth" element={() => (!user ? <Auth /> : <Navigate to="/posts" />)}/>
       </Routes>
       
     </Container>
