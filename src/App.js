@@ -38,16 +38,15 @@ const App = () => {
     <Container maxWidth="xl" sx={{backgroundColor:'#2A2F4F'}}>
       
       <Routes>
+       <Route path="/" element={<Navigate to="/home"/>}/>
         <Route path="/home" element={<Navbar finished={finished} setFinished={setFinished}/>}/>
-        <Route path="/" element={<Navigate to="/home"/>}/>
-        <Route path="/home" element={<Home/>}/>
         <Route path="/deadend1" element={<DeadEnd1/>}/>
         <Route  path="/dashboard" element={user?.result?.email==='admin@gmail.com'&&<Dashboard/>}/>
-        <Route key={window.location.pathname} path="/clue1" element={user&&<Clue1 />}/>
-        <Route path="/clue2" element={user&&<Clue2 />}/>
-        <Route path="/clue3" element={user&&<Clue3 />}/>
-        <Route path="/clue4" element={user&&<Clue4 />}/>
-        <Route path="/clue5" element={user&&<Clue5 setFinished={setFinished}/>}/>
+        <Route path="/clue1" element={<Clue1 />}/>
+        <Route path="/clue2" element={<Clue2 />}/>
+        <Route path="/clue3" element={<Clue3 />}/>
+        <Route path="/clue4" element={<Clue4 />}/>
+        <Route path="/clue5" element={<Clue5 setFinished={setFinished}/>}/>
         <Route path="/auth" element={!user?<Auth/>:<Navigate to="/home"/>}/>
       </Routes>
       
