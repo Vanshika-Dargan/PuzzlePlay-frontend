@@ -49,7 +49,7 @@ const Auth=()=>{
     const login =  useGoogleLogin({
         onSuccess: async ({code}) => {
           try{
-          const tokens = await axios.post('http://localhost:5000/auth/google', {
+          const tokens = await axios.post('https://puzzleplay.onrender.com/auth/google', {
              code
             })
             const result=jwt_decode(tokens?.data?.id_token);
