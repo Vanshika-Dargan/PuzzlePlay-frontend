@@ -32,7 +32,6 @@ const App = () => {
 });
   const user=JSON.parse(localStorage.getItem('profile'));
   return (
-    <GoogleOAuthProvider clientId={process.env.CLIENT_ID}>
     <BrowserRouter>
     <ThemeProvider theme={theme}>
     <Container maxWidth="xl" sx={{backgroundColor:'#2A2F4F'}}>
@@ -47,13 +46,13 @@ const App = () => {
         <Route path="/clue3" element={<Clue3 />}/>
         <Route path="/clue4" element={<Clue4 />}/>
         <Route path="/clue5" element={<Clue5 setFinished={setFinished}/>}/>
-        <Route path="/auth" element={() => (!user ? <Auth /> : <Navigate to="/posts" />)}/>
+        <Route path="/auth" element={!user ? <Auth /> : <Navigate to="/home" /> }/>
       </Routes>
       
     </Container>
     </ThemeProvider>
     </BrowserRouter>
-    </GoogleOAuthProvider>
+
   );
 };
 export default App;
