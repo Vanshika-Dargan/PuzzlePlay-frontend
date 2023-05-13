@@ -11,7 +11,11 @@ export const scoreReducer = createSlice({
     {
         state.value=state.value+action.payload
     },
+    resetScore:(state)=>
+    {
+        state.value=0;
+    }
     }})
 
-    export const{updateScore}=scoreReducer.actions
+    export const{updateScore,resetScore}=scoreReducer.actions
     export default scoreReducer.reducer
