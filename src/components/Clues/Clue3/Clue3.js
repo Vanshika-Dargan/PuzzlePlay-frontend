@@ -17,6 +17,7 @@ function HiddenLinkGame() {
 
   const handleClick = () => {
     dispatch(updateScore(5));
+    dispatch(updateTime(gameTime));
     navigate("/clue4");
   };
 
@@ -29,11 +30,6 @@ function HiddenLinkGame() {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    if (secretLinkFound) {
-      dispatch(updateTime(gameTime));
-    }
-  }, [dispatch, secretLinkFound, gameTime]);
 
   const startGame = () => {
     setGameStarted(true);
