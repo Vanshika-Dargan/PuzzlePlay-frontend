@@ -7,6 +7,8 @@ import {useEffect} from 'react'
 import decode from 'jwt-decode';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import video from '../../images/rubic.mp4'
+import { resetScore } from '../../reducers/scoreReducer';
+import { resetTime } from '../../reducers/gameReducer';
 
 const Navbar=({finished,setFinished})=>{
   const theme = createTheme({
@@ -38,6 +40,15 @@ const Navbar=({finished,setFinished})=>{
   }
   setUser(JSON.parse(localStorage.getItem('profile')));
   },[location])
+  const dashboard=()=>{
+ 
+    navigate('/dashboard')
+  }
+  const handleClick=()=>{
+    dispatch(resetScore());
+    dispatch(resetTime());
+    navigate('/clue1')
+  }
     return (
      <>
         <AppBar color="inherit" position="static" 
@@ -64,6 +75,13 @@ const Navbar=({finished,setFinished})=>{
           ):(
           <Button component={Link} to="/auth" variant="contained" color="primary">Sign In To Play</Button>
           )}
+          {user?.result.email==='admin@gmail.com'&&(
+
+            
+          
+          <Button  variant="contained" color="primary" onClick={dashboard}>Dashboard</Button>
+          
+          )}
           </Toolbar>
       </AppBar>
       {!user?(
@@ -78,7 +96,7 @@ const Navbar=({finished,setFinished})=>{
     <Container sx={{marginTop:'150px'}}>
       <Typography variant='h2' sx={{display:"flex",alignItem:"center",justifyContent:"center",color:'white'}}>Welcome to PuzzlePlay</Typography>
       
-      <Button sx={{marginLeft:'500px',marginTop:'30px'}}variant="contained" color="primary" size="large" onClick={()=>navigate('/clue1')}>
+      <Button sx={{marginLeft:'500px',marginTop:'30px'}}variant="contained" color="primary" size="large" onClick={handleClick}>
         Start Game
       </Button>
     </Container>
