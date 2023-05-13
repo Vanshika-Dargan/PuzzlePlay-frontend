@@ -5,7 +5,9 @@ import {useDispatch,useSelector} from 'react-redux'
 import { useNavigate } from "react-router-dom";
 import {updateScore} from '../../../reducers/scoreReducer'
 import { Typography,Container,Button} from "@mui/material";
+
 function MagicSquare({updateTotalTime}) {
+  
   const navigate=useNavigate();
   const time=useSelector((state)=>state.gameReducer.value);
   const dispatch=useDispatch();
@@ -31,11 +33,10 @@ function MagicSquare({updateTotalTime}) {
     newGrid[rowIndex][colIndex] = parseInt(event.target.value, 10) || null;
     setGrid(newGrid);
   };
-  const handleSubmit=()=>{
-    dispatch(updateTime(gameTime))
-    navigate('/clue3')
+  const checkSolution=()=>{
+    navigate('/deadend1');
   }
-  const checkSolution = () => {
+  const handleSubmit = () => {
     const rowSums = [0, 0, 0];
     const colSums = [0, 0, 0];
     let diagonalSum1 = 0;
@@ -58,8 +59,10 @@ function MagicSquare({updateTotalTime}) {
    
     if(sums.every((sum) => sum === 15)===true)
     dispatch(updateScore(5));
-    else
-    navigate('/deadend1');
+    dispatch(updateTime(gameTime))
+    navigate('/clue3')
+    
+    
   };
  
   return (
