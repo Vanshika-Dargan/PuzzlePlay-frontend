@@ -10,7 +10,7 @@ import { Container, Typography, Button, TextField} from '@mui/material'
 import './styles.css'
 const Clue1 = () => {
   const location=useLocation();
-  //const time=useSelector((state)=>state.gameReducer.value);
+ 
   const dispatch=useDispatch();
   const navigate=useNavigate();
 
@@ -36,8 +36,7 @@ const Clue1 = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(updateTime(gameTime));
-    if(answer===16)
-    
+    if(answer==="16")
     dispatch(updateScore(5));
     navigate('/clue2')
   };
