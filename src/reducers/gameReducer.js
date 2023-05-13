@@ -11,7 +11,12 @@ export const gameReducer = createSlice({
     {
         state.value=state.value+action.payload
     },
+    resetTime:(state)=>
+    {
+        state.value=0;
+    }
     }})
 
-    export const{updateTime}=gameReducer.actions
+    export const{updateTime,resetTime}=gameReducer.actions
     export default gameReducer.reducer
+
