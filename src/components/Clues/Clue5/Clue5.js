@@ -7,9 +7,10 @@ import { updateTime } from "../../../reducers/gameReducer";
 import {updateScore} from '../../../reducers/scoreReducer'
 import { Typography,Button,Container } from '@mui/material';
 function Game({setFinished}) {
-  const time=useSelector((state)=>state.gameReducer.value);
-  const finalScore=useSelector((state)=>state.scoreReducer.value);
+
+
   const [gameTime, setGameTime] = useState(0);
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setGameTime((prevTime) => {
@@ -19,11 +20,12 @@ function Game({setFinished}) {
     return () => clearInterval(interval);
   }, []);
 
+
   const dispatch=useDispatch();
   const navigate=useNavigate();
   const user=JSON.parse(localStorage.getItem('profile'));
-  const duration=time+gameTime;
-  const net=finalScore;
+
+
   const [score, setScore] = useState(0);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [questions, setQuestions] = useState([
@@ -147,24 +149,25 @@ function Game({setFinished}) {
       ],
       }
   ]);
+  const [gameOver, setGameOver] = useState(false);
+
 
   function handleAnswer(score) {
 
     setScore(score + score);
-    dispatch(updateScore(score));
     setQuestionIndex(questionIndex + 1);
   }
 
-  function dashboard() {
-    const userId=user?.result?._id;
-   
-    dispatch(addDashboardData({userId,duration,net}))
-    setFinished(true);
-    navigate('/dashboard')
-  }
+
 
   const currentQuestion = questions[questionIndex];
-
+const handleSubmit=()=>{
+  const userId=user?.result?._id;
+    dispatch(updateTime(gameTime))
+    dispatch(updateScore(score))
+    
+    navigate('/final');
+}
   return (
     <div>
      
@@ -192,34 +195,22 @@ function Game({setFinished}) {
         </div>
       ) : (
         <Container sx={{display:'flex', alignItems:'center',justifyContent:'center',flexDirection:'column',marginTop:'120px'}}>
-          <Typography variant='h1' sx={{color:'white'}}><span>Game over...</span><br/> Your final score is {finalScore}.</Typography>
-          {!(user?.result?.email==='admin@gmail.com') && <Button 
+          <Typography variant="h6" sx={{color:'white',display:'flex',alignItems:'center',justifyContent:'end',marginTop:'10px'}}>Game time: {gameTime} seconds</Typography>
+          <Typography variant='h1' sx={{color:'white'}}><span>Game over...</span></Typography>
+         <Button 
   sx={{
     width:"150px",
     backgroundColor: 'secondary.main',
     color: 'white',
     borderRadius: '10px',
     padding: '10px 20px',
-    '&:hover': {
-      backgroundColor: 'secondary.dark',
-      marginTop: '40px',
-    },
+    
     
   }} 
-  onClick={()=>navigate('/')}
+  onClick={handleSubmit}
 >
-  Home
-</Button>}
-          {user?.result?.email==='admin@gmail.com' &&<Button sx={{ 
-  backgroundColor: 'primary.main', 
-  marginTop:'30px',
-  color: 'white',
-  borderRadius: '10px',
-  padding: '10px 20px',
-  marginRight: '10px',
-  '&:hover': {
-    backgroundColor: 'primary.dark'
-  }} } onClick={dashboard}>Dashboard</Button>}
+ View Results
+</Button>
         </Container>
       )}
     </div>
