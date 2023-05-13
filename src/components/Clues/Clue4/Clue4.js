@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { updateTime } from '../../../reducers/gameReducer';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { updateScore } from '../../../reducers/scoreReducer';
 import { Container, Typography,Button} from '@mui/material';
 
 const EmotionalIntelligenceGame = () => {
+  
   const navigate = useNavigate();
   const [gameTime, setGameTime] = useState(0);
   const dispatch = useDispatch();
@@ -24,9 +25,7 @@ const EmotionalIntelligenceGame = () => {
   const [answerStatus, setAnswerStatus] = useState(null);
   const [gameOver, setGameOver] = useState(false);
 
-  useEffect(() => {
-    dispatch(updateTime(gameTime));
-  }, [gameOver, dispatch, gameTime]);
+
 
   const questions = [
     {
@@ -68,6 +67,7 @@ const EmotionalIntelligenceGame = () => {
 
   const handleClick = () => {
     dispatch(updateScore(score));
+    dispatch(updateTime(gameTime));
     navigate('/clue5');
   };
 
